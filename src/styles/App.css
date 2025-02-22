@@ -1,0 +1,30 @@
+.user {
+    margin: 15px;
+    overflow: hidden;
+    .ant-list-item {
+        padding: 2px 0 3px;
+        color: #000000a6;
+        border: none;
+        svg {
+            font-size: 18px;
+        }
+    }
+    h3 {
+        font-size: 1.65rem;
+        margin: 0 0 6px;
+    }
+    .ant-card-cover {
+        background: #f5f5f5;
+    }
+}
+.ant-form-item {
+    margin: 0 0 30px;
+    @media (max-width: 572px) {
+        .ant-form-item-label {
+            padding: 0 0 10px;
+        }
+    }
+}
+.ant-input {
+    color: #000000a6;
+}

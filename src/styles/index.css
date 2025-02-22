@@ -1,0 +1,5 @@
+@import "~antd/dist/reset.css";
+html {
+    font-size: 62%;
+    line-height: 1.8;
+}

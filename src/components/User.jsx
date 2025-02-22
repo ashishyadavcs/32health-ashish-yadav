@@ -3,21 +3,46 @@ import {
     EditOutlined,
     GlobalOutlined,
     HeartFilled,
+    HeartOutlined,
     MailOutlined,
     PhoneOutlined,
 } from "@ant-design/icons";
-import { Button, Card, ConfigProvider, Flex } from "antd";
+import { Card, ConfigProvider, Flex, List } from "antd";
+import Item from "antd/es/list/Item";
 import Title from "antd/es/typography/Title";
-import React from "react";
+import React, { useState } from "react";
+import Popup from "./Popup";
 
-const User = ({ data }) => {
-    const { name, email, username, phone, website } = data;
+const User = ({ data, deleteUser, updateUser, markFavorite }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { name, email, username, phone, website, id, favorite = false } = data;
+    const listData = [
+        {
+            icon: <MailOutlined />,
+            text: email,
+        },
+        {
+            icon: <PhoneOutlined />,
+            text: phone,
+        },
+        {
+            icon: <GlobalOutlined />,
+            text: website.includes("http") ? website : `http://${website}`,
+        },
+    ];
     return (
         <ConfigProvider
             theme={{
                 components: {
                     Card: {
                         actionsBg: "#fafafa",
+                        actionsLiMargin: 13,
+                        borderRadiusLG: 2,
+                        colorBorderSecondary: "#e8e8e8",
+                    },
+
+                    List: {
+                        itemPadding: 2,
                     },
                 },
             }}
@@ -33,25 +58,44 @@ const User = ({ data }) => {
                     />
                 }
                 actions={[
-                    <HeartFilled width={20} height={20} />,
-                    <EditOutlined width={18} height={18} />,
-                    <DeleteFilled width={18} height={18} />,
+                    favorite ? (
+                        <HeartFilled
+                            onClick={e => markFavorite(id)}
+                            style={{ fontSize: "20px", color: "#ff0000" }}
+                        />
+                    ) : (
+                        <HeartOutlined
+                            onClick={e => markFavorite(id)}
+                            style={{ fontSize: "20px", color: "#ff0000" }}
+                        />
+                    ),
+                    <EditOutlined
+                        style={{ fontSize: "18px" }}
+                        onClick={e => setIsModalOpen(true)}
+                    />,
+                    <DeleteFilled style={{ fontSize: "18px" }} onClick={e => deleteUser(id)} />,
                 ]}
             >
                 <Title level={3}>{name}</Title>
-                <Flex gap="small" align="center">
-                    <MailOutlined />
-                    {email}
-                </Flex>
-                <Flex gap="small" align="center">
-                    <PhoneOutlined />
-                    {phone}
-                </Flex>
-                <Flex gap="small" align="center">
-                    <GlobalOutlined />
-                    {website}
-                </Flex>
+                <List
+                    dataSource={listData}
+                    bordered={false}
+                    renderItem={item => (
+                        <Item>
+                            <Flex style={{ gap: "10px" }} align="center">
+                                {item.icon}
+                                {item.text}
+                            </Flex>
+                        </Item>
+                    )}
+                />
             </Card>
+            <Popup
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                user={data}
+                updateUser={updateUser}
+            />
         </ConfigProvider>
     );
 };
