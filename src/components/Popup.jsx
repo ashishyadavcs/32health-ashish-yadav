@@ -15,7 +15,6 @@ const Popup = ({ isModalOpen, setIsModalOpen, user, updateUser }) => {
                 open={isModalOpen}
                 onOk={e => form.submit()}
                 onCancel={() => setIsModalOpen(false)}
-                style={{ top: 100 }}
                 styles={{
                     content: {
                         padding: 0,

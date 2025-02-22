@@ -17,14 +17,25 @@
         background: #f5f5f5;
     }
 }
-.ant-form-item {
-    margin: 0 0 30px;
-    @media (max-width: 572px) {
-        .ant-form-item-label {
-            padding: 0 0 10px;
-        }
-    }
-}
 .ant-input {
     color: #000000a6;
+}
+.ant-modal {
+    top: 100px;
+}
+.ant-modal .ant-modal-close:hover {
+    background: transparent;
+}
+@media (min-width: 768px) {
+    .ant-form-item {
+        margin: 0 0 30px;
+    }
+}
+@media (max-width: 575px) {
+    .ant-modal {
+        top: 60px;
+    }
+    .ant-form-item .ant-form-item-label {
+        padding: 0 0 10px;
+    }
 }

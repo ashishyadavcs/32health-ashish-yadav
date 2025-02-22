@@ -8,6 +8,7 @@ function App() {
     const [users, setUsers] = useState([]);
     const [isLoading, setisLoading] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
+
     const fetchUsers = async () => {
         try {
             const fetchUserReq = await fetch(`https://jsonplaceholder.typicode.com/users`);
@@ -29,6 +30,7 @@ function App() {
     const updateUser = (id, updateddata) => {
         setUsers(prev => prev.map(user => (user.id == id ? { ...user, ...updateddata } : user)));
     };
+
     const markFavorite = id => {
         setUsers(prev =>
             prev.map(user => (user.id == id ? { ...user, favorite: !user.favorite } : user))
